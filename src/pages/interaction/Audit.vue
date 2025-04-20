@@ -1,12 +1,12 @@
 <template>
-  <view class="interaction h-full"> 这是审计页面 </view>
+  <view class="interaction h-full">
+    <nut-button type="info" @click="navTo">新增</nut-button>
+  </view>
 </template>
-<script setup></script>
-<style lang="scss" scoped>
-  :deep(.nut-tabs) {
-    height: 100%;
-    .nut-tabs__content {
-      height: calc(100% - var(--window-bottom));
-    }
+<script setup>
+  const navTo = () => {
+    uni.navigateTo({
+      url: './AuditAdd'
+    })
   }
-</style>
+</script>

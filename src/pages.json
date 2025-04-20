@@ -64,6 +64,12 @@
       "style": {
         "navigationBarTitleText": "文件管理"
       }
+    },
+    {
+      "path": "pages/interaction/AuditAdd",
+      "style": {
+        "navigationBarTitleText": "新增审计"
+      }
     }
   ],
   "tabBar": {
