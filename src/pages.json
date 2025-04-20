@@ -1,0 +1,107 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^nut-(.*)?-(.*)": "nutui-uniapp/components/$1$2/$1$2.vue",
+      "^nut-(.*)": "nutui-uniapp/components/$1/$1.vue"
+    }
+  },
+  "pages": [
+    // {
+    //   "path": "pages/index/index",
+    //   "type": "home",
+    //   "layout": "default",
+    //   "style": {
+    //     "navigationBarTitleText": "uni-app"
+    //   }
+    // },
+    // {
+    //   "path": "pages/interaction/interaction",
+    //   "type": "page",
+    //   "layout": "default",
+    //   "style": {
+    //     "navigationBarTitleText": "互动"
+    //   }
+    // },
+    {
+      "path": "pages/interaction/Audit",
+      "style": {
+        "navigationBarTitleText": "审计"
+      }
+    },
+    {
+      "path": "pages/interaction/Checklist",
+      "style": {
+        "navigationBarTitleText": "检查单"
+      }
+    },
+    {
+      "path": "pages/interaction/Finding",
+      "style": {
+        "navigationBarTitleText": "不符合项"
+      }
+    },
+    {
+      "path": "pages/interaction/About",
+      "style": {
+        "navigationBarTitleText": "关于"
+      }
+    },
+    {
+      "path": "pages/interaction/DataItem",
+      "style": {
+        "navigationBarTitleText": "数据项管理"
+      }
+    },
+    {
+      "path": "pages/interaction/User",
+      "style": {
+        "navigationBarTitleText": "用户管理"
+      }
+    },
+    {
+      "path": "pages/interaction/File",
+      "style": {
+        "navigationBarTitleText": "文件管理"
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#1296db",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/interaction/Audit",
+        "iconPath": "static/images/interaction_i_no.png",
+        "selectedIconPath": "static/images/interaction_i_yes.png",
+        "text": "审计"
+      },
+      {
+        "pagePath": "pages/interaction/Checklist",
+        "iconPath": "static/images/interaction_i_no.png",
+        "selectedIconPath": "static/images/interaction_i_yes.png",
+        "text": "检查单"
+      },
+      {
+        "pagePath": "pages/interaction/Finding",
+        "iconPath": "static/images/interaction_i_no.png",
+        "selectedIconPath": "static/images/interaction_i_yes.png",
+        "text": "不符合项"
+      },
+      {
+        "pagePath": "pages/interaction/About",
+        "iconPath": "static/images/index_i_no.png",
+        "selectedIconPath": "static/images/index_i_yes.png",
+        "text": "关于"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
+}
