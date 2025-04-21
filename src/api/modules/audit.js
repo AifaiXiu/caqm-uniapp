@@ -2,6 +2,8 @@
 /**
  * 分页查询所有检查单
  */
+import { request } from '../request'
+
 export function getAudits(page, size) {
   return request({
     url: '/audits',
@@ -36,7 +38,6 @@ export function addAudit(
   closeUserId,
   remark,
   checklistsIds,
-  findingsIds,
   summary
 ) {
   return request({
@@ -57,11 +58,13 @@ export function addAudit(
       closeUserId,
       remark,
       checklistsIds,
-      findingsIds,
-      summary
+      summary,
+      findingsIds: 0,
+      status: 0
     }
   })
 }
+// findingsids and status  在新增的时候都是默认值
 export function updateAudit(
   id,
   name,
