@@ -70,6 +70,12 @@
       "style": {
         "navigationBarTitleText": "新增审计"
       }
+    },
+    {
+      "path": "pages/interaction/FindingAdd",
+      "style": {
+        "navigationBarTitleText": "新增不符合项"
+      }
     }
   ],
   "tabBar": {

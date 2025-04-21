@@ -1,7 +1,13 @@
 <template>
-  <view class="h-full">不符合项页面 </view>
+  <view class="h-full">
+    <nut-button type="info" @click="navTo">新增</nut-button>
+  </view>
 </template>
 
-<script lang="ts" setup></script>
-
-<style scoped></style>
+<script lang="ts" setup>
+  const navTo = () => {
+    uni.navigateTo({
+      url: './FindingAdd'
+    })
+  }
+</script>
