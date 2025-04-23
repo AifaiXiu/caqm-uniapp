@@ -4,13 +4,13 @@
  */
 import { request } from '../request'
 
-export function getAudits(page, size) {
+export function getAudits() {
   return request({
     url: '/audits',
     method: 'get',
     params: {
-      page,
-      size
+      page: 0,
+      size: 1000000
     }
   })
 }

@@ -2,13 +2,15 @@
 /**
  * 分页查询所有检查单
  */
-export function getFindings(page, size) {
+import { request } from '../request'
+
+export function getFindings() {
   return request({
     url: '/findings',
     method: 'get',
     params: {
-      page,
-      size
+      page: 0,
+      size: 1000000
     }
   })
 }
@@ -21,6 +23,7 @@ export function getFindingsByIds(ids) {
     }
   })
 }
+// 新增只增加基础内容
 export function addFinding(
   auditId,
   processId,
@@ -29,51 +32,21 @@ export function addFinding(
   targetCloseTime,
   deptId,
   findingTypeId,
-  evaluateResult,
-  measureDutyManId,
-  finisherId,
-  targetDate,
-  finishDate,
-  details,
-  rootAnalyzeId,
-  relatedDeptId,
-  evaluateDutyManId,
-  possibility,
-  severity,
-  riskValue,
-  isSecure,
-  eventDescribe,
-  executeDate,
-  secure
+  evaluateResult
 ) {
   return request({
     url: '/findings',
     method: 'post',
     data: {
-      auditId,
       status: 1,
+      auditId,
       processId,
       airportId,
       closeUserId,
       targetCloseTime,
       deptId,
       findingTypeId,
-      evaluateResult,
-      measureDutyManId,
-      finisherId,
-      targetDate,
-      finishDate,
-      details,
-      rootAnalyzeId,
-      relatedDeptId,
-      evaluateDutyManId,
-      possibility,
-      severity,
-      riskValue,
-      isSecure,
-      eventDescribe,
-      executeDate,
-      secure
+      evaluateResult
     }
   })
 }
@@ -102,8 +75,7 @@ export function updateFinding(
   riskValue,
   isSecure,
   eventDescribe,
-  executeDate,
-  secure
+  executeDate
 ) {
   return request({
     url: '/findings',
@@ -133,8 +105,7 @@ export function updateFinding(
       riskValue,
       isSecure,
       eventDescribe,
-      executeDate,
-      secure
+      executeDate
     }
   })
 }

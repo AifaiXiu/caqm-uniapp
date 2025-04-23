@@ -1,9 +1,7 @@
 <template>
   <view class="interaction h-full">
     <nut-tabs v-model="state.tab11value" type="smile" swipeable>
-      <nut-tab-pane class="important-p-0 important-px-2" title="加载刷新"
-        ><MescrollBox
-      /></nut-tab-pane>
+      <nut-tab-pane class="important-p-0 important-px-2" title="加载刷新"></nut-tab-pane>
       <nut-tab-pane title="Tab 3"> 这是tab页面 </nut-tab-pane>
     </nut-tabs>
   </view>
