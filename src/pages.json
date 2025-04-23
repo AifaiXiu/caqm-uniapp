@@ -82,6 +82,12 @@
       "style": {
         "navigationBarTitleText": "修改不符合项"
       }
+    },
+    {
+      "path": "pages/interaction/AuditEdit",
+      "style": {
+        "navigationBarTitleText": "修改审计"
+      }
     }
   ],
   "tabBar": {
