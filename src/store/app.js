@@ -2,7 +2,7 @@ import { piniaStore } from '../store'
 export const useAppStore = defineStore('app', {
   state: () => {
     return {
-      darkMode: 'light'
+      darkMode: 'dark'
     }
   },
   actions: {},

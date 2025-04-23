@@ -88,6 +88,12 @@
       "style": {
         "navigationBarTitleText": "修改审计"
       }
+    },
+    {
+      "path": "pages/interaction/FileAdd",
+      "style": {
+        "navigationBarTitleText": "新增文件"
+      }
     }
   ],
   "tabBar": {

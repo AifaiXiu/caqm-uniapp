@@ -7,11 +7,11 @@
       @refresherrefresh="onRefresh"
       style="height: 100%"
     >
-      <nut-button type="primary" @click="navTo">新增</nut-button>
+      <nut-button type="success" @click="navTo">新增</nut-button>
 
       <view v-for="item in allFindings" :key="item.id">
         <nut-cell-group :title="item.audit.name">
-          <nut-button type="info" @click="deleteAction(item.id)">删除</nut-button>
+          <nut-button type="danger" @click="deleteAction(item.id)">删除</nut-button>
           <nut-button type="info" @click="editAction(item.id)">编辑</nut-button>
           <nut-cell title="流程" :desc="item.process.value"></nut-cell>
           <nut-cell title="部门" :desc="item.dept.value"></nut-cell>
