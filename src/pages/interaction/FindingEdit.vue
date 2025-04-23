@@ -51,8 +51,13 @@
 <script lang="ts" setup>
   import { getDataItems } from '../../api/modules/dataitem'
   import { getUsers } from '../../api/modules/user'
-  import { getChecklists } from '../../api/modules/checklist'
   import { getAudits } from '../../api/modules/audit'
+  import { updateFinding } from '../../api/modules/finding'
+  const currentFindingId = ref(0)
+  onLoad((options) => {
+    currentFindingId.value = options.id
+    console.log('路由参数ID:', currentFindingId.value)
+  })
   // 和tab相关的
   const state = reactive({
     tab11value: '0'

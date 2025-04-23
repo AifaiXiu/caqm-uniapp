@@ -76,6 +76,12 @@
       "style": {
         "navigationBarTitleText": "新增不符合项"
       }
+    },
+    {
+      "path": "pages/interaction/FindingEdit",
+      "style": {
+        "navigationBarTitleText": "修改不符合项"
+      }
     }
   ],
   "tabBar": {
