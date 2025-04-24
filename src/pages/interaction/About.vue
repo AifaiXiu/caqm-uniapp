@@ -12,6 +12,7 @@
     <nut-cell title="数据项配置" is-link @click="navigateTo('./DataItem')"></nut-cell>
     <nut-cell title="用户管理 " is-link @click="navigateTo('./User')"></nut-cell>
     <nut-cell title="文件管理 " is-link @click="navigateTo('./File')"></nut-cell>
+    <nut-cell title="退出登录 " is-link @click="logout"></nut-cell>
   </view>
 </template>
 
@@ -19,6 +20,11 @@
   const navigateTo = (url) => {
     uni.navigateTo({
       url: url
+    })
+  }
+  const logout = () => {
+    uni.redirectTo({
+      url: './Login'
     })
   }
 </script>

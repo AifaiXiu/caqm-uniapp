@@ -15,6 +15,7 @@
           <nut-cell title="部门" :desc="item.dept.value"></nut-cell>
           <nut-cell title="流程" :desc="item.process.value"></nut-cell>
           <nut-cell title="主审人" :desc="item.mainAuditor.username"></nut-cell>
+          <nut-cell title="状态" :desc="caculateStatus(item.status)"></nut-cell>
         </nut-cell-group>
       </view>
     </scroll-view>
@@ -33,7 +34,19 @@
       url: './AuditAdd'
     })
   }
-
+  const caculateStatus = (status) => {
+    if (status === 0) {
+      return '计划'
+    } else if (status === 1) {
+      return '执行'
+    } else if (status === 2) {
+      return '取消'
+    } else if (status === 3) {
+      return '待关闭'
+    } else {
+      return '已关闭'
+    }
+  }
   // 初始化加载
   onMounted(() => {
     loadAudits()

@@ -1,50 +1,90 @@
 <template>
   <view class="h-full">
-    <nut-tabs v-model="state.tab11value" type="smile" swipeable>
-      <nut-tab-pane class="important-p-0 important-px-2" title="不符合项">
-        <nut-form>
-          <!-- 这是和不符合项相关的基础内容 -->
-          <nut-form-item label="审计"> </nut-form-item>
-          <nut-form-item label="流程"> </nut-form-item>
-          <nut-form-item label="机场"> </nut-form-item>
-          <nut-form-item label="部门"> </nut-form-item>
-          <nut-form-item label="不符合项类型"> </nut-form-item>
-          <nut-form-item label="详细内容"> </nut-form-item>
-          <nut-form-item label="目标关闭日期"> </nut-form-item>
-          <nut-form-item label="关闭人"> </nut-form-item>
-        </nut-form>
-        <nut-button type="info">修改</nut-button>
-        <nut-button type="primary" @click="cancel">返回</nut-button>
-      </nut-tab-pane>
-      <nut-tab-pane title="风险评估">
-        <nut-form>
-          <!-- 这是和风险评估相关的内容 -->
-          <nut-form-item label="根源分析"> </nut-form-item>
-          <nut-form-item label="相关部门"> </nut-form-item>
-          <nut-form-item label="评估责任人"> </nut-form-item>
-          <nut-form-item label="可能性"> </nut-form-item>
-          <nut-form-item label="严重性"> </nut-form-item>
-          <nut-form-item label="风险值"> </nut-form-item>
-          <nut-form-item label="事件描述"> </nut-form-item>
-          <nut-form-item label="执行日期"> </nut-form-item>
-          <nut-form-item label="是否安全事件"> </nut-form-item>
-        </nut-form>
-        <nut-button type="info">修改</nut-button>
-        <nut-button type="primary" @click="cancel">返回</nut-button>
-      </nut-tab-pane>
-      <nut-tab-pane title="纠正措施">
-        <nut-form>
-          <!-- 这是纠正措施相关的内容 -->
-          <nut-form-item label="责任人"> </nut-form-item>
-          <nut-form-item label="完成人"> </nut-form-item>
-          <nut-form-item label="目标日期"> </nut-form-item>
-          <nut-form-item label="完成日期"> </nut-form-item>
-          <nut-form-item label="详情"> </nut-form-item>
-        </nut-form>
-        <nut-button type="info">修改</nut-button>
-        <nut-button type="primary" @click="cancel">返回</nut-button>
-      </nut-tab-pane>
-    </nut-tabs>
+    <nut-form>
+      <!-- 这是和不符合项相关的基础内容 -->
+      <!-- 审计选择 -->
+      <nut-form-item label="审计">
+        <nut-picker
+          cancel-text=" "
+          :columns="audits"
+          title="   "
+          @confirm="onAuditConfirm"
+        ></nut-picker>
+      </nut-form-item>
+
+      <!-- 流程选择 -->
+      <nut-form-item label="流程">
+        <nut-picker
+          cancel-text=" "
+          :columns="processes"
+          title="   "
+          @confirm="onProcessConfirm"
+        ></nut-picker>
+      </nut-form-item>
+
+      <!-- 机场选择 -->
+      <nut-form-item label="机场">
+        <nut-picker
+          cancel-text=" "
+          :columns="airports"
+          title="   "
+          @confirm="onAirportConfirm"
+        ></nut-picker>
+      </nut-form-item>
+
+      <!-- 部门选择 -->
+      <nut-form-item label="部门">
+        <nut-picker
+          cancel-text=" "
+          :columns="depts"
+          title="   "
+          @confirm="onDeptConfirm"
+        ></nut-picker>
+      </nut-form-item>
+
+      <!-- 不符合项类型选择 -->
+      <nut-form-item label="不符合项类型">
+        <nut-picker
+          cancel-text=" "
+          :columns="findingTypes"
+          title="   "
+          @confirm="onFindingTypeConfirm"
+        ></nut-picker>
+      </nut-form-item>
+
+      <!-- 详细内容输入 -->
+      <nut-form-item label="详细内容">
+        <nut-textarea
+          v-model="evaluateResult"
+          placeholder="请输入不符合项详细内容"
+          :autosize="{ minHeight: 100 }"
+        ></nut-textarea>
+      </nut-form-item>
+
+      <!-- 目标关闭日期选择 -->
+      <nut-form-item label="目标关闭日期">
+        <nut-date-picker
+          v-model="currentTargetCloseDate"
+          :min-date="minDate"
+          :max-date="maxDate"
+          three-dimensional
+          is-show-chinese
+          @confirm="onTargetCloseConfirm"
+        ></nut-date-picker>
+      </nut-form-item>
+
+      <!-- 关闭人选择 -->
+      <nut-form-item label="关闭人">
+        <nut-picker
+          cancel-text=" "
+          :columns="users"
+          title="   "
+          @confirm="onCloserConfirm"
+        ></nut-picker>
+      </nut-form-item>
+    </nut-form>
+    <nut-button type="info" @click="updateAction">修改</nut-button>
+    <nut-button type="primary" @click="cancel">返回</nut-button>
   </view>
 </template>
 
@@ -52,44 +92,49 @@
   import { getDataItems } from '../../api/modules/dataitem'
   import { getUsers } from '../../api/modules/user'
   import { getAudits } from '../../api/modules/audit'
-  import { updateFinding } from '../../api/modules/finding'
+  import { updateFindingBasic, getFindingsByIds } from '../../api/modules/finding'
   const currentFindingId = ref(0)
   onLoad((options) => {
     currentFindingId.value = options.id
     console.log('路由参数ID:', currentFindingId.value)
-  })
-  // 和tab相关的
-  const state = reactive({
-    tab11value: '0'
+    // getFindingsByIds(currentFindingId.value).then((res) => {
+    //   console.log(res.data.data[0], '获取到了')
+    //   const data = res.data.data[0]
+    //   auditId.value = data.audit.id
+    //   processId.value = data.process.id
+    // })
   })
   const cancel = () => {
     uni.navigateBack()
   }
-  // 表单数据
-  // 数据项
+  const updateAction = () => {
+    const obj = {
+      id: currentFindingId.value,
+      auditId: auditId.value,
+      processId: processId.value,
+      airportId: airportId.value,
+      closeUserId: closeUserId.value,
+      targetCloseTime: targetCloseTime.value,
+      deptId: deptId.value,
+      findingTypeId: findingTypeId.value,
+      evaluateResult: evaluateResult.value
+    }
+    console.log(obj, '这是修改对象')
+    updateFindingBasic(obj).then((res) => {
+      console.log(res, '修改成功')
+      cancel()
+    })
+  }
+  // 不符合项基本表单数据
+  const auditId = ref(0)
   const processId = ref(0)
   const airportId = ref(0)
+  const closeUserId = ref(0)
+  const targetCloseTime = ref('')
   const deptId = ref(0)
   const findingTypeId = ref(0)
-  const rootAnalyzeId = ref(0)
-  const relatedDeptId = ref(0)
-  // 普通数据
-  const targetCloseTime = ref('')
   const evaluateResult = ref('')
-  const targetDate = ref('')
-  const executeDate = ref('')
-  const finishDate = ref('')
-  const details = ref('')
-  const possibility = ref(0)
-  const severity = ref(0)
-  const riskValue = ref(0)
-  const isSecure = ref(0)
-  const eventDescribe = ref('')
-  const closeUserId = ref(0)
-  const measureDutyManId = ref(0)
-  const finisherId = ref(0)
-  const evaluateDutyManId = ref(0)
-  const auditId = ref(0)
+
   // 数据项列表
   const depts = ref([])
   const airports = ref([])
@@ -128,13 +173,58 @@
   }
   const loadUsers = async () => {
     const res = await getUsers()
-    users.value = res.data.data.content
+    users.value = res.data.data.content.map((user) => ({
+      text: user.username,
+      value: user.id
+    }))
   }
   const loadAudits = async () => {
     const res = await getAudits()
-    audits.value = res.data.data.content
+    audits.value = res.data.data.content.map((audit) => ({
+      text: audit.name,
+      value: audit.id
+    }))
   }
   const saveFinding = () => {}
+
+  // 不符合项基础相关的
+  // 选择器确认事件
+  const onAuditConfirm = ({ selectedOptions }) => {
+    auditId.value = Number(selectedOptions[0]?.value || 0)
+  }
+
+  const onProcessConfirm = ({ selectedOptions }) => {
+    processId.value = Number(selectedOptions[0]?.value || 0)
+  }
+
+  const onAirportConfirm = ({ selectedOptions }) => {
+    airportId.value = Number(selectedOptions[0]?.value || 0)
+  }
+
+  const onDeptConfirm = ({ selectedOptions }) => {
+    deptId.value = Number(selectedOptions[0]?.value || 0)
+  }
+
+  const onFindingTypeConfirm = ({ selectedOptions }) => {
+    findingTypeId.value = Number(selectedOptions[0]?.value || 0)
+  }
+
+  const onCloserConfirm = ({ selectedOptions }) => {
+    closeUserId.value = Number(selectedOptions[0]?.value || 0)
+  }
+
+  const onTargetCloseConfirm = () => {
+    targetCloseTime.value = formatToLocalDateTime(currentTargetCloseDate.value)
+  }
+  // 日期相关
+  const minDate = new Date(2020, 0, 1)
+  const maxDate = new Date(2030, 11, 31)
+  const currentTargetCloseDate = ref(new Date())
+  // 日期格式化
+  const formatToLocalDateTime = (date) => {
+    const pad = (num) => String(num).padStart(2, '0')
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T00:00:00`
+  }
 </script>
 <style lang="scss" scoped>
   :deep(.nut-tabs) {

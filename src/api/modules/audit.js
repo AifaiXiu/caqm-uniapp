@@ -82,7 +82,6 @@ export function updateAudit(
   closeUserId,
   remark,
   checklistsIds,
-  findingsIds,
   summary
 ) {
   return request({
@@ -105,7 +104,6 @@ export function updateAudit(
       closeUserId,
       remark,
       checklistsIds,
-      findingsIds,
       summary
     }
   })

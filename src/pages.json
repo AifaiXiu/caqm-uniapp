@@ -24,6 +24,12 @@
     //   }
     // },
     {
+      "path": "pages/interaction/Login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
       "path": "pages/interaction/Audit",
       "style": {
         "navigationBarTitleText": "审计"
@@ -93,6 +99,18 @@
       "path": "pages/interaction/FileAdd",
       "style": {
         "navigationBarTitleText": "新增文件"
+      }
+    },
+    {
+      "path": "pages/interaction/FindingCorrect",
+      "style": {
+        "navigationBarTitleText": "纠正措施"
+      }
+    },
+    {
+      "path": "pages/interaction/FindingEvaluate",
+      "style": {
+        "navigationBarTitleText": "风险评估"
       }
     }
   ],

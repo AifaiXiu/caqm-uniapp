@@ -12,13 +12,16 @@
       <view v-for="item in allFindings" :key="item.id">
         <nut-cell-group :title="item.audit.name">
           <nut-button type="danger" @click="deleteAction(item.id)">删除</nut-button>
-          <nut-button type="info" @click="editAction(item.id)">编辑</nut-button>
+          <nut-button type="info" @click="editAction(item.id)">修改</nut-button>
+          <nut-button type="info" @click="evaluateAction(item.id)">评估</nut-button>
+          <nut-button type="info" @click="correctAction(item.id)">纠正</nut-button>
           <nut-cell title="流程" :desc="item.process.value"></nut-cell>
           <nut-cell title="部门" :desc="item.dept.value"></nut-cell>
           <nut-cell title="机场" :desc="item.airport.value"></nut-cell>
           <nut-cell title="目标关闭时期" :desc="item.targetCloseTime"></nut-cell>
           <nut-cell title="详细内容" :desc="item.evaluateResult"></nut-cell>
           <nut-cell title="不符合项类型" :desc="item.findingType.value"></nut-cell>
+          <nut-cell title="状态" :desc="item.status == 1 ? '开启' : '关闭'"></nut-cell>
         </nut-cell-group>
       </view>
     </scroll-view>
@@ -61,6 +64,12 @@
   }
   const editAction = (id) => {
     uni.navigateTo({ url: './FindingEdit?id=' + id })
+  }
+  const evaluateAction = (id) => {
+    uni.navigateTo({ url: './FindingEvaluate?id=' + id })
+  }
+  const correctAction = (id) => {
+    uni.navigateTo({ url: './FindingCorrect?id=' + id })
   }
   // 跳转到新增页面
   const navTo = () => {

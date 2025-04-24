@@ -39,6 +39,7 @@ export function addFinding(
     method: 'post',
     data: {
       status: 1,
+      // 这里是基础的不符合项内容
       auditId,
       processId,
       airportId,
@@ -50,68 +51,40 @@ export function addFinding(
     }
   })
 }
-export function updateFinding(
-  id,
-  auditId,
-  status,
-  processId,
-  airportId,
-  closeUserId,
-  targetCloseTime,
-  deptId,
-  findingTypeId,
-  evaluateResult,
-  measureDutyManId,
-  finisherId,
-  targetDate,
-  finishDate,
-  details,
-  measureType,
-  rootAnalyzeId,
-  relatedDeptId,
-  evaluateDutyManId,
-  possibility,
-  severity,
-  riskValue,
-  isSecure,
-  eventDescribe,
-  executeDate
-) {
+export function updateFinding(obj) {
   return request({
     url: '/findings',
     method: 'post',
-    data: {
-      id,
-      auditId,
-      status,
-      processId,
-      airportId,
-      closeUserId,
-      targetCloseTime,
-      deptId,
-      findingTypeId,
-      evaluateResult,
-      measureDutyManId,
-      finisherId,
-      targetDate,
-      finishDate,
-      details,
-      measureType,
-      rootAnalyzeId,
-      relatedDeptId,
-      evaluateDutyManId,
-      possibility,
-      severity,
-      riskValue,
-      isSecure,
-      eventDescribe,
-      executeDate
-    }
+    data: obj
   })
 }
+
 export function deleteFinding(id) {
   return request({
     url: `/findings/${id}`,
     method: 'delete'
+  })
+}
+
+export function updateFindingBasic(obj) {
+  return request({
+    url: '/findings/basic',
+    method: 'post',
+    data: obj
+  })
+}
+
+export function updateFindingEvaluate(obj) {
+  return request({
+    url: '/findings/evaluate',
+    method: 'post',
+    data: obj
+  })
+}
+export function updateFindingMeasure(obj) {
+  return request({
+    url: '/findings/measure',
+    method: 'post',
+    data: obj
   })
 }
