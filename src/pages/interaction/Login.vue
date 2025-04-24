@@ -34,15 +34,17 @@
     </view>
 
     <view class="footer">
-      <text class="copyright">© 2025 企业管理系统 版权所有</text>
+      <text class="copyright">© 2025 民航质量管理系统 版权所有</text>
     </view>
   </view>
 </template>
 
 <script setup>
   import { ref } from 'vue'
-
+  import { login } from '../../api/modules/user'
+  import { useUserCountStore } from '../../store/auth'
   // 表单数据
+  const useUserStore = useUserCountStore()
   const username = ref('')
   const password = ref('')
   const isLoading = ref(false)
@@ -69,33 +71,55 @@
     // 设置加载状态
     isLoading.value = true
 
-    // 模拟登录请求
-    setTimeout(() => {
-      // 登录成功，存储登录状态
-      uni.setStorageSync('isLoggedIn', true)
-      uni.setStorageSync('userInfo', {
-        username: username.value
-        // 其他用户信息...
-      })
+    // 调用登录API
+    login({ username: username.value, passwd: password.value })
+      .then((res) => {
+        // 修正拼写错误：red -> res
+        if (res.data.code === 1) {
+          if (res.data.data.username === 'admin') {
+            useUserStore.ChangeAdm(true)
+            useUserStore.ChangeUser(res.data.data.username)
+          }
+          // 登录成功，存储用户信息
+          uni.setStorageSync('isLoggedIn', true)
+          uni.setStorageSync('userInfo', res.data.data) // 存储返回的用户信息
 
-      // 显示成功提示
-      uni.showToast({
-        title: '登录成功',
-        icon: 'success',
-        duration: 1500
-      })
+          // 显示成功提示
+          uni.showToast({
+            title: res.data.msg || '登录成功',
+            icon: 'success',
+            duration: 1500
+          })
 
-      // 延迟跳转到首页
-      setTimeout(() => {
-        // 跳转到 tabbar 首页
-        uni.switchTab({
-          url: '/pages/interaction/Audit'
+          // 延迟跳转到首页
+          setTimeout(() => {
+            // 跳转到 tabbar 首页
+            uni.switchTab({
+              url: '/pages/interaction/Audit'
+            })
+          }, 1500)
+        } else {
+          // 登录失败，显示错误信息
+          uni.showToast({
+            title: res.data.msg || '登录失败',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      })
+      .catch((error) => {
+        // 处理网络错误或异常
+        console.error('登录请求失败:', error)
+        uni.showToast({
+          title: '网络异常，请稍后重试',
+          icon: 'none',
+          duration: 2000
         })
-
-        // 重置加载状态
+      })
+      .finally(() => {
+        // 无论成功失败，最后都要重置加载状态
         isLoading.value = false
-      }, 1500)
-    }, 1000)
+      })
   }
 </script>
 

@@ -64,3 +64,11 @@ export function deleteUser(id) {
     method: 'delete'
   })
 }
+
+export function login(obj) {
+  return request({
+    url: '/users/login',
+    method: 'post',
+    data: obj
+  })
+}

@@ -1,17 +1,21 @@
 import { piniaStore } from '../store'
-export const useCountStore = defineStore('auth', {
+export const useUserStore = defineStore('auth', {
   state: () => {
     return {
-      isAdmin: false
+      isAdmin: false,
+      username: ''
     }
   },
   actions: {
     ChangeAdm(isAdmin) {
       this.isAdmin = isAdmin
+    },
+    ChangeUser(username) {
+      this.username = username
     }
   }
 })
 
-export function useOutsideCountStore() {
-  return useCountStore(piniaStore)
+export function useUserCountStore() {
+  return useUserStore(piniaStore)
 }
