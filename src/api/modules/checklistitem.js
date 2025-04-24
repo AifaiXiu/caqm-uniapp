@@ -27,6 +27,13 @@ export function getChecklistItemsByIds(ids) {
     }
   })
 }
+export function updateItemDetails(obj) {
+  return request({
+    url: '/checklistItems/detail',
+    method: 'post',
+    data: obj
+  })
+}
 /**
  *新增检查单项
  */
@@ -88,5 +95,12 @@ export function deleteChecklistItem(id) {
   return request({
     url: `/checklistItems/${id}`,
     method: 'delete'
+  })
+}
+
+export function getChecklistItemById(id) {
+  return request({
+    url: `/checklistItems/${id}`,
+    method: 'get'
   })
 }

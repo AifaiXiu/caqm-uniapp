@@ -12,6 +12,7 @@
         <nut-cell-group :title="item.name">
           <nut-button type="danger" @click="deleteAction(item.id)">删除</nut-button>
           <nut-button type="info" @click="editAction(item.id)">编辑</nut-button>
+          <nut-button type="info" @click="doAuditAction(item.checklists)">审计</nut-button>
           <nut-cell title="部门" :desc="item.dept.value"></nut-cell>
           <nut-cell title="流程" :desc="item.process.value"></nut-cell>
           <nut-cell title="主审人" :desc="item.mainAuditor.username"></nut-cell>
@@ -75,6 +76,17 @@
 
   const editAction = (id) => {
     uni.navigateTo({ url: './AuditEdit?id=' + id })
+  }
+  const doAuditAction = (checklists) => {
+    const itemIds = Array.from(
+      new Set(
+        checklists
+          .flatMap((item) => item.checklistItemsIds.split(',')) // 将每个字符串按逗号分割为数组
+          .map((id) => id.trim()) // 去除可能的空格
+      )
+    ).join(',')
+    uni.navigateTo({ url: './DoAuditList?itemIds=' + itemIds })
+    console.log(itemIds, 'itemIds')
   }
 </script>
 

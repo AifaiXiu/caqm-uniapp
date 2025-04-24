@@ -23,12 +23,12 @@
     //     "navigationBarTitleText": "互动"
     //   }
     // },
-    {
-      "path": "pages/interaction/Login",
-      "style": {
-        "navigationBarTitleText": "登录"
-      }
-    },
+    // {
+    //   "path": "pages/interaction/Login",
+    //   "style": {
+    //     "navigationBarTitleText": "登录"
+    //   }
+    // },
     {
       "path": "pages/interaction/Audit",
       "style": {
@@ -111,6 +111,18 @@
       "path": "pages/interaction/FindingEvaluate",
       "style": {
         "navigationBarTitleText": "风险评估"
+      }
+    },
+    {
+      "path": "pages/interaction/DoAuditList",
+      "style": {
+        "navigationBarTitleText": "审计列表"
+      }
+    },
+    {
+      "path": "pages/interaction/DoAudit",
+      "style": {
+        "navigationBarTitleText": "审计"
       }
     }
   ],
