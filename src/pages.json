@@ -23,12 +23,12 @@
     //     "navigationBarTitleText": "互动"
     //   }
     // },
-    // {
-    //   "path": "pages/interaction/Login",
-    //   "style": {
-    //     "navigationBarTitleText": "登录"
-    //   }
-    // },
+    {
+      "path": "pages/interaction/Login",
+      "style": {
+        "navigationBarTitleText": "登录"
+      }
+    },
     {
       "path": "pages/interaction/Audit",
       "style": {
