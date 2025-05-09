@@ -16,7 +16,19 @@
           <nut-cell title="部门" :desc="item.dept.value"></nut-cell>
           <nut-cell title="流程" :desc="item.process.value"></nut-cell>
           <nut-cell title="主审人" :desc="item.mainAuditor.username"></nut-cell>
-          <nut-cell title="状态" :desc="caculateStatus(item.status)"></nut-cell>
+          <nut-cell title="计划开始时间" :desc="item.plannedStartDate"></nut-cell>
+          <nut-cell title="机场" :desc="item.airport.value"></nut-cell>
+          <nut-cell title="流程" :desc="item.process.value"></nut-cell>
+          <nut-cell title="检擦单">
+            <view v-for="item in item.checklists" :key="item.id">
+              <nut-tag type="primary" round>{{ item.name }}</nut-tag>
+            </view>
+          </nut-cell>
+          <nut-cell title="其他审计人">
+            <view v-for="item in item.otherAuditors" :key="item.id">
+              <nut-tag type="primary" round>{{ item.username }}</nut-tag>
+            </view>
+          </nut-cell>
         </nut-cell-group>
       </view>
     </scroll-view>

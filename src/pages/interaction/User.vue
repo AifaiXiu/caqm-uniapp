@@ -10,7 +10,10 @@
           <nut-button type="danger" @click="deleteAction(user.id)">删除</nut-button>
           <nut-cell title="邮箱" :desc="user.email"></nut-cell>
           <nut-cell title="密码" :desc="user.passwd"></nut-cell>
-          <nut-cell title="部门" :desc="user.department.value"></nut-cell>
+          <nut-cell
+            title="部门"
+            :desc="user.department == null ? '' : user.department.value"
+          ></nut-cell>
         </nut-cell-group>
       </view>
     </view>

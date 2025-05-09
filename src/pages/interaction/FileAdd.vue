@@ -23,7 +23,7 @@
 
   const fileName = ref('')
   const filePath = ref('/aihua/666')
-  const uploadUrl = ref('http://localhost:8080/upload/file')
+  const uploadUrl = ref('http://152.136.166.253:8080/upload/file')
   const selectedFile = ref(null)
   const debugInfo = ref('') // 用于显示调试信息
 

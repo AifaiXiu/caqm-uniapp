@@ -171,7 +171,7 @@
   }
 
   .input-field {
-    width: 100%;
+    width: 90%;
     height: 90rpx;
     border: 1px solid #e0e0e0;
     border-radius: 8rpx;

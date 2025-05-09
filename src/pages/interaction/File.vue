@@ -39,7 +39,7 @@
   })
   // 下载文件并打开
   const downloadFile = (filePath) => {
-    const downloadUrl = `http://localhost:8080/upload/file?filePath=${encodeURIComponent(filePath)}`
+    const downloadUrl = `http://152.136.166.253:8080/upload/file?filePath=${encodeURIComponent(filePath)}`
 
     console.log('发起下载请求:', downloadUrl)
 
@@ -47,6 +47,20 @@
       url: downloadUrl,
       success: (res) => {
         console.log('下载请求成功:', res.tempFilePath)
+        // 调用 wx.openDocument 进行文件预览
+        wx.openDocument({
+          filePath: res.tempFilePath,
+          success: (openRes) => {
+            console.log('文档打开成功', openRes)
+          },
+          fail: (openErr) => {
+            console.error('文档打开失败', openErr)
+            uni.showToast({
+              title: '文档打开失败',
+              icon: 'none'
+            })
+          }
+        })
 
         if (res.statusCode === 200) {
           // 使用临时路径进行处理，而不保存到永久存储，这样避免占用空间

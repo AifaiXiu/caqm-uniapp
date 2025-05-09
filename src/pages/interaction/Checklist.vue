@@ -94,6 +94,10 @@
   const allItems = ref([])
   const columns = ref([])
 
+  // 定义 itemValue 和 value
+  const itemValue = ref([])
+  const value = ref([])
+
   // 页面初始化加载
   onMounted(() => {
     loadData()

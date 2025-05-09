@@ -21,7 +21,6 @@
           <nut-cell title="目标关闭时期" :desc="item.targetCloseTime"></nut-cell>
           <nut-cell title="详细内容" :desc="item.evaluateResult"></nut-cell>
           <nut-cell title="不符合项类型" :desc="item.findingType.value"></nut-cell>
-          <nut-cell title="状态" :desc="item.status == 1 ? '开启' : '关闭'"></nut-cell>
         </nut-cell-group>
       </view>
     </scroll-view>
