@@ -1,11 +1,11 @@
 <template>
   <view class="interaction h-full">
     <scroll-view
-      scroll-y
-      refresher-enabled
       :refresher-triggered="isRefreshing"
-      @refresherrefresh="onRefresh"
+      refresher-enabled
+      scroll-y
       style="height: 100%"
+      @refresherrefresh="onRefresh"
     >
       <nut-button type="success" @click="navTo">新增</nut-button>
       <view v-for="item in audits" :key="item.id">
@@ -13,20 +13,49 @@
           <nut-button type="danger" @click="deleteAction(item.id)">删除</nut-button>
           <nut-button type="info" @click="editAction(item.id)">编辑</nut-button>
           <nut-button type="info" @click="doAuditAction(item.checklists)">审计</nut-button>
-          <nut-cell title="部门" :desc="item.dept.value"></nut-cell>
-          <nut-cell title="流程" :desc="item.process.value"></nut-cell>
-          <nut-cell title="主审人" :desc="item.mainAuditor.username"></nut-cell>
-          <nut-cell title="计划开始时间" :desc="item.plannedStartDate"></nut-cell>
-          <nut-cell title="机场" :desc="item.airport.value"></nut-cell>
-          <nut-cell title="流程" :desc="item.process.value"></nut-cell>
+          <nut-cell
+            :desc="item.dept == null ? '暂未选择' : item.dept.value"
+            title="部门"
+          ></nut-cell>
+          <nut-cell
+            :desc="item.process == null ? '暂未选择' : item.process.value"
+            title="流程"
+          ></nut-cell>
+          <nut-cell
+            :desc="item.mainAuditor == null ? '暂未选择' : item.mainAuditor.username"
+            title="主审人"
+          ></nut-cell>
+          <nut-cell
+            :desc="item.plannedStartDate == null ? '暂未选择' : item.plannedStartDate"
+            title="计划开始时间"
+          ></nut-cell>
+          <nut-cell
+            :desc="item.realStartDate == null ? '暂未开始' : item.realStartDate"
+            title="实际开始时间"
+          ></nut-cell>
+          <nut-cell
+            :desc="item.airport == null ? '暂未选择' : item.airport.value"
+            title="机场"
+          ></nut-cell>
+          <nut-cell
+            :desc="item.auditMethodId == null ? '暂未选择' : item.auditMethodId.value"
+            title="审计方法"
+          ></nut-cell>
+          <nut-cell :desc="item.status == 0 ? '开启' : '关闭'" title="状态"></nut-cell>
+          <nut-cell
+            :desc="item.closeUser == null ? '暂未关闭' : item.closeUser.username"
+            title="关闭人"
+          ></nut-cell>
+          <nut-cell :desc="item.remark == null ? '' : item.remark" title="备注"></nut-cell>
+          <nut-cell :desc="item.summary == '' ? '暂无' : item.summary" title="总结信息"></nut-cell>
           <nut-cell title="检擦单">
             <view v-for="item in item.checklists" :key="item.id">
-              <nut-tag type="primary" round>{{ item.name }}</nut-tag>
+              <nut-tag round type="primary">{{ item.name }}</nut-tag>
             </view>
           </nut-cell>
           <nut-cell title="其他审计人">
             <view v-for="item in item.otherAuditors" :key="item.id">
-              <nut-tag type="primary" round>{{ item.username }}</nut-tag>
+              <nut-tag round type="primary">{{ item.username }}</nut-tag>
             </view>
           </nut-cell>
         </nut-cell-group>
@@ -37,7 +66,7 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { getAudits, deleteAudit } from '../../api/modules/audit'
+  import { deleteAudit, getAudits } from '../../api/modules/audit'
 
   const audits = ref([])
   const isRefreshing = ref(false)
@@ -107,6 +136,7 @@
     box-sizing: border-box;
     padding: 16rpx;
   }
+
   scroll-view {
     height: 100%;
   }
